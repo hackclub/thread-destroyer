@@ -23,5 +23,4 @@ class Environment:
             raise Exception("SLACK_LOG_CHANNEL is not set")
 
 
-
 env = Environment()
