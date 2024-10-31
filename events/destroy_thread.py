@@ -9,8 +9,8 @@ async def destroy_thread(user_id: str, channel_id: str, root_ts: str, client: As
     )
     message_log = []
     for message in messages["messages"]:
-        user_id = message.get('user', 'Unknown user')
-        message_log.append(f"{user_id}: {message.get('text', 'There was no text associated with this message')}")
+        m_user_id = message.get('user', 'Unknown user')
+        message_log.append(f"{m_user_id}: {message.get('text', 'There was no text associated with this message')}")
         add_message_to_delete_queue(
             channel_id=channel_id, message_ts=message["ts"]
         )
