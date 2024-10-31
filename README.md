@@ -37,7 +37,7 @@ This is a really simple tool for admins to delete threads on Slack.
                 "chat:write",
                 "groups:history",
                 "channels:history",
-                "groups:write"
+                "groups:write",
             ],
             "bot": [
                 "channels:history",
@@ -46,7 +46,8 @@ This is a really simple tool for admins to delete threads on Slack.
                 "channels:read",
                 "groups:read",
                 "users:read",
-                "commands"
+                "commands",
+                "files:write",
             ]
         }
     },
