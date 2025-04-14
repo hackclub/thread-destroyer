@@ -10,6 +10,7 @@ class Environment:
         self.slack_user_token = os.environ.get("SLACK_USER_TOKEN")
         self.slack_signing_secret = os.environ.get("SLACK_SIGNING_SECRET")
         self.slack_log_channel = os.environ.get("SLACK_LOG_CHANNEL")
+        self.slack_bot_tokens = os.environ.get("SLACK_TOKENS")
 
         self.port = int(os.environ.get("PORT", 3000))
 
@@ -21,6 +22,8 @@ class Environment:
             raise Exception("SLACK_SIGNING_SECRET is not set")
         if not self.slack_log_channel:
             raise Exception("SLACK_LOG_CHANNEL is not set")
+        if not self.slack_bot_tokens:
+             raise Exception("SLACK_TOKENS is not set")
 
 
 env = Environment()

@@ -1,6 +1,10 @@
 from slack_sdk.web.async_client import AsyncWebClient
 from utils.env import env
 from utils.queue import add_message_to_delete_queue
+import random
+
+slack_tokens = os.getenv("SLACK_TOKENS", "")
+token_list = [token.strip() for token in slack_tokens.split(",") if token.strip()]
 
 
 async def destroy_thread(
@@ -16,7 +20,7 @@ async def destroy_thread(
         message_log.append(
             f"{m_user_id}: {message.get('text', 'There was no text associated with this message')}"
         )
-        add_message_to_delete_queue(channel_id=channel_id, message_ts=message["ts"])
+        add_message_to_delete_queue(channel_id=channel_id, message_ts=message["ts"], token=random.choice(token_list))
 
     message_log = "\n".join(message_log)
 

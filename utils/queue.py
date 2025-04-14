@@ -4,14 +4,14 @@ from slack_sdk import WebClient
 from slack_sdk.errors import SlackApiError
 from .env import env
 
-client = WebClient(token=env.slack_user_token)
 
 delete_queue = Queue()
 
 
 def process_queue():
     while True:
-        channel_id, message_ts = delete_queue.get()
+        channel_id, message_ts, token = delete_queue.get()
+        client = WebClient(token=token)
         try:
             client.chat_delete(channel=channel_id, ts=message_ts, as_user=True)
         except SlackApiError as e:
@@ -26,5 +26,5 @@ def process_queue():
         delete_queue.task_done()
 
 
-def add_message_to_delete_queue(channel_id, message_ts):
-    delete_queue.put((channel_id, message_ts))
+def add_message_to_delete_queue(channel_id, message_ts, token):
+    delete_queue.put((channel_id, message_ts, token))
